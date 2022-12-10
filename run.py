@@ -5,6 +5,8 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 import random
 import json
+import uvicorn
+import os
 
 from process_data import process
 
@@ -60,13 +62,9 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
         manager.disconnect(websocket)
         await manager.broadcast(f"Client #{client_id} left the chat")
 
-# def format_data(data):
-#     if 'current_shows' in data.keys():
-#         current_shows = data['current_shows']
-#         current_shows_keys = current_shows.keys()
-#         for key in current_shows_keys:
-#             station = data['station']
-#             show = data['show']
-#             dj = data['dj']
-#             color = data['rgb']
-#             timestamp = data['timestamp']
+if __name__=="__main__":
+    uvicorn.run(
+        "run:app", 
+        host="0.0.0.0", 
+        port=os.getenv("PORT", default=5000), 
+        log_level="info")
