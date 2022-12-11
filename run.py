@@ -50,8 +50,10 @@ manager = ConnectionManager()
 async def root():
     return {"message": "Hello World"}
 
-@app.websocket("/ws/{client_id}")
-async def websocket_endpoint(websocket: WebSocket, client_id: int):
+# @app.websocket("/ws/{client_id}")
+# async def websocket_endpoint(websocket: WebSocket, client_id: int):
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
     # Open websocket
     await manager.connect(websocket)
 
