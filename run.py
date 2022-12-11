@@ -70,4 +70,7 @@ async def websocket_endpoint(websocket: WebSocket):
         await manager.broadcast(f"Client #{client_id} left the chat")
 
 if __name__=="__main__":
-    uvicorn.run("run:app", host="0.0.0.0", port=os.getenv("PORT", default=5002),log_level="info")
+    uvicorn.run(
+        "run:app", 
+        host="0.0.0.0", 
+        port=int(os.getenv("PORT", default=5002),log_level="info"))
