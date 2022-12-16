@@ -42,6 +42,8 @@ def process_audio_data(data):
 
     # process once there are 4 cumulative
     if len(temp_audio_values[station_mask].index) == 4:
+        print(f'STATION VALUES ARE MORE THAN 4\n{station_vals}')
+
         # Create a new DataFrame cleansed of outliers
         station_vals[['tempo','loudness', 'pitch']] = station_vals.loc[:, ['tempo','loudness', 'pitch']].apply(func = remove_outlier_IQR)
         station_vals = station_vals.fillna(0)
