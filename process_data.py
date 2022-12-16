@@ -34,6 +34,7 @@ def process_audio_data(data):
         )
     
     temp_audio_values = pd.concat([temp_audio_values, new_row], ignore_index = True)
+    print(f'TEMPORARY AUDIO VALUES\n{temp_audio_values}')
 
     # create mask to separate out audio values from one station only
     station_mask = temp_audio_values['station'] == data['station']
@@ -55,7 +56,7 @@ def process_audio_data(data):
         # Add new values to cumulative holder
         global cumulative_audio_values
         cumulative_audio_values = pd.concat([cumulative_audio_values, station_vals], ignore_index = True)
-        print(f'Cumulative audio values are now\n{cumulative_audio_values}')
+        print(f'CUMULATIVE AUDIO VALUES\n{cumulative_audio_values}')
         
         # TODO Write to sqlite3
 
