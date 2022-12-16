@@ -7,6 +7,8 @@ import random
 import json
 import uvicorn
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 from process_data import process
 
@@ -50,10 +52,8 @@ manager = ConnectionManager()
 async def root():
     return {"message": "Hello World"}
 
-# @app.websocket("/ws/{client_id}")
-# async def websocket_endpoint(websocket: WebSocket, client_id: int):
-@app.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
+@app.websocket("/ws/{client_id}")
+async def websocket_endpoint(websocket: WebSocket, client_id: int):
     # Open websocket
     await manager.connect(websocket)
 
@@ -74,3 +74,4 @@ if __name__=="__main__":
         "run:app", 
         host="0.0.0.0", 
         port=int(os.getenv("PORT")))
+
